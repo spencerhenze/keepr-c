@@ -10,7 +10,7 @@ using keepr.Models;
 namespace keepr.Controllers
 {
     [Route("api/[controller]")]
-    
+
     [Authorize]
     // everything beyond this point will require authenication
     public class VaultsController : Controller
@@ -71,6 +71,8 @@ namespace keepr.Controllers
             vault.UserId = GetUserId();
             if (vault.UserId == "")
             {
+                // requiring authorization (using [Authorize] at the top of the class) will handle most unauthorized cases by returning an empty page. 
+                // This will only be hit if a session persistancy issue is encountered. (the session in the cookies is present, but the server terminated it on its end somehow by respinning)
                 return "Not logged in";
             }
             _db.Vaults.Add(vault);
