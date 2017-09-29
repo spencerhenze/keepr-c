@@ -12,6 +12,7 @@ using System.Text;
 
 namespace keepr.Controllers
 {
+    [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     public class AccountController : Controller
     {
@@ -85,9 +86,13 @@ namespace keepr.Controllers
         {
             var user = HttpContext.User;
             byte[] byteId;
-            HttpContext.Session.TryGetValue("uid", out byteId);
-            var id = System.Text.Encoding.UTF8.GetString(byteId);
-            return await _userManager.FindByIdAsync(id);
+            if (HttpContext.Session != null)
+            {
+                HttpContext.Session.TryGetValue("uid", out byteId);
+                var id = System.Text.Encoding.UTF8.GetString(byteId);
+                return await _userManager.FindByIdAsync(id);
+            }
+            return null;
         }
 
         private JsonResult Errors(IdentityResult result)

@@ -43,7 +43,9 @@ namespace keepr
                     .AllowCredentials();
                 });
             });
-            services.AddSession();
+            //handle persisting sessions here
+            services.AddSession(o => {
+            });
             ConfigureAuthentication(services);
             services.AddEntityFrameworkSqlServer().AddDbContext<KeeprContext>();
             services.AddMvc();

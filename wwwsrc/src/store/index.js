@@ -11,7 +11,7 @@ function CreateAccountExample() {
 }
 
 function loginAndGetDataExample() {
-  api.post('account/login', { email: "j@j.com", password: 'Testing123!' }).then(GetDataExample)
+  api.post('account/login', { email: "joe@blow.com", password: 'Password123!' }).then(GetDataExample)
 }
 
 function logout() {
@@ -32,6 +32,6 @@ function getAuth(){
   })
 }
 
-// loginAndGetDataExample()
+loginAndGetDataExample()
 getAuth()
 

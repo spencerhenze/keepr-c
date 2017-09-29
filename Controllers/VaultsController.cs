@@ -10,6 +10,9 @@ using keepr.Models;
 namespace keepr.Controllers
 {
     [Route("api/[controller]")]
+    
+    [Authorize]
+    // everything beyond this point will require authenication
     public class VaultsController : Controller
     {
         public KeeprContext _db { get; private set; }
@@ -19,21 +22,21 @@ namespace keepr.Controllers
             _db = db;
         }
 
-        // GET api/vaults (gets only the user's vaults)
-        [HttpGet]
-        public IEnumerable<Vault> Get()
-        {
-            //find all vaults where the vault.userId == *req.session.uid*
-            var id = GetUserId();
-            return _db.Vaults.Where(e => e.UserId == id);
-        }
 
         private string GetUserId()
         {
             byte[] byteId;
             HttpContext.Session.TryGetValue("uid", out byteId);
-            var id = System.Text.Encoding.UTF8.GetString(byteId);
-            return id;
+            if (byteId != null)
+            {
+                var id = System.Text.Encoding.UTF8.GetString(byteId);
+                return id;
+
+            }
+            else
+            {
+                return "";
+            }
         }
 
         // GET api/vaults/Id
@@ -43,13 +46,36 @@ namespace keepr.Controllers
             return "value";
         }
 
-        [Authorize]
-        // everything beyond this point will require authenication
+        // GET api/vaults (gets only the user's vaults)
+        [HttpGet]
+        public IEnumerable<Vault> Get()
+        {
+            //find all vaults where the vault.userId == *req.session.uid*
+            var id = GetUserId();
+            if (id != null)
+            {
+                return _db.Vaults.Where(e => e.UserId == id);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
 
         // POST api/vaults
         [HttpPost]
-        public void Post([FromBody]string value)
+        public string Post([FromBody]Vault vault)
         {
+
+            vault.UserId = GetUserId();
+            if (vault.UserId == "")
+            {
+                return "Not logged in";
+            }
+            _db.Vaults.Add(vault);
+            _db.SaveChanges();
+            return "Successfully added vault";
         }
 
         // PUT api/vaults/id
