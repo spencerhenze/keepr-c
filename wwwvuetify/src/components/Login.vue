@@ -4,7 +4,7 @@
         <v-layout row>
             <v-flex xs12>
                 <h2>This is where you log in</h2>
-                <router-link :to="{name: 'Hello'}">
+                <router-link :to="{name: 'Home'}">
                     <v-btn success dark @click="toggleLoggedIn">Login</v-btn>
                 </router-link>
             </v-flex>
@@ -15,7 +15,7 @@
 
 <script>
     export default {
-        name: 'hello',
+        name: 'login',
         data() {
             return {
                 msg: 'Welcome to Your Vue.js App'

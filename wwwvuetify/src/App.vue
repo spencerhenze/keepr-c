@@ -18,7 +18,9 @@
       <!-- show drawer icon only if logged in -->
       <v-toolbar-side-icon v-if="loggedIn" @click.stop="drawer = !drawer" dark></v-toolbar-side-icon>
 
-      <v-toolbar-title v-text="title"></v-toolbar-title>
+
+      <img src="http://res.cloudinary.com/dvh7zccln/image/upload/v1506964113/powerline_k_ready_qjmbox.png" alt="" style="max-height:70px">
+      <v-toolbar-title v-text="title" style="margin-left: -15px"></v-toolbar-title>
       <v-spacer></v-spacer>
       <router-link v-if="!loggedIn" :to="{name: 'Login'}">
         <v-btn primary dark>Login</v-btn>
@@ -53,7 +55,7 @@
         items: [
           { icon: 'bubble_chart', title: 'Inspire' }
         ],
-        title: 'Keepr'
+        title: 'eepr'
       }
     },
     computed: {
