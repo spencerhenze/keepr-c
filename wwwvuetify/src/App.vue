@@ -26,6 +26,7 @@
       <v-btn v-if="loggedIn" error dark>Logout</v-btn>
 
     </v-toolbar>
+
     <main>
       <v-container fluid>
         <v-slide-y-transition mode="out-in">
@@ -37,6 +38,7 @@
         </v-slide-y-transition>
       </v-container>
     </main>
+
     <v-footer>
       <span>&copy; 2017</span>
     </v-footer>
@@ -47,14 +49,19 @@
   export default {
     data() {
       return {
-        loggedIn: false,
         drawer: false,
         items: [
           { icon: 'bubble_chart', title: 'Inspire' }
         ],
         title: 'Keepr'
       }
-    }
+    },
+    computed: {
+      loggedIn() {
+        return this.$store.state.loggedIn;
+      }
+    },
+
   }
 
 </script>

@@ -9,9 +9,15 @@ vue.use(vuex)
 
 var store = new vuex.Store({
     state: {
+        user: {},
+        loggedIn: false,
+        results: [],
     
     },
     mutations: {
+        toggleLoggedIn(store, value) {
+            store.loggedIn = !store.loggedIn;
+        }
 
     },
     actions: {

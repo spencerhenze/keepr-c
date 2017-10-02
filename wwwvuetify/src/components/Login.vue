@@ -4,7 +4,9 @@
         <v-layout row>
             <v-flex xs12>
                 <h2>This is where you log in</h2>
-                <v-btn success dark>Login</v-btn>
+                <router-link :to="{name: 'Hello'}">
+                    <v-btn success dark @click="toggleLoggedIn">Login</v-btn>
+                </router-link>
             </v-flex>
         </v-layout>
 
@@ -17,6 +19,11 @@
         data() {
             return {
                 msg: 'Welcome to Your Vue.js App'
+            }
+        },
+        methods: {
+            toggleLoggedIn() {
+                this.$store.commit('toggleLoggedIn')
             }
         }
     }
