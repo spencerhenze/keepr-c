@@ -1,22 +1,39 @@
 <template>
   <div class="home">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-      <br>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+    <v-container fluid grid-list-md class="transparent">
+      <v-layout row wrap>
+
+        <!-- load results -->
+        <v-flex  v-for="card in results" :key="card.title">
+          <v-card>
+            <v-card-media :src="card.src" height="200px">
+              <v-container fill-height fluid>
+                <v-layout fill-height>
+                  <v-flex xs12 align-end flexbox>
+                    <span class="headline white--text" v-text="card.title"></span>
+                  </v-flex>
+                </v-layout>
+              </v-container>
+            </v-card-media>
+            <v-card-actions class="white">
+              <v-spacer></v-spacer>
+
+              <v-btn icon>
+                <v-icon class="grey--text">favorite</v-icon>
+              </v-btn>
+              <v-btn icon>
+                <v-icon class="grey--text">bookmark</v-icon>
+              </v-btn>
+              <v-btn icon>
+                <v-icon class="grey--text">share</v-icon>
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-flex>
+        <!-- end load results -->
+
+      </v-layout>
+    </v-container>
   </div>
 </template>
 
@@ -26,6 +43,12 @@
     data() {
       return {
         msg: 'Welcome to Your Vue.js App'
+      }
+    },
+
+    computed: {
+      results() {
+        return this.$store.state.results;
       }
     }
   }
