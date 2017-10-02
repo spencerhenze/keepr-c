@@ -1,7 +1,7 @@
 <template>
   <v-app dark>
     <!-- render drawer only if logged in -->
-    <v-navigation-drawer v-if="loggedIn" persistent :mini-variant="miniVariant" :clipped="clipped" v-model="drawer" enable-resize-watcher>
+    <v-navigation-drawer v-if="loggedIn" persistent v-model="drawer" enable-resize-watcher>
       <v-list>
         <v-list-tile value="true" v-for="(item, i) in items" :key="i">
           <v-list-tile-action>

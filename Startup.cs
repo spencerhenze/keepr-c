@@ -44,8 +44,7 @@ namespace keepr
                 });
             });
             //handle persisting sessions here
-            services.AddSession(o => {
-            });
+            services.AddSession();
             ConfigureAuthentication(services);
             services.AddEntityFrameworkSqlServer().AddDbContext<KeeprContext>();
             services.AddMvc();

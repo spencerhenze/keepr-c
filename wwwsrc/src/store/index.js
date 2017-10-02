@@ -32,6 +32,6 @@ function getAuth(){
   })
 }
 
-loginAndGetDataExample()
+//loginAndGetDataExample()
 getAuth()
 

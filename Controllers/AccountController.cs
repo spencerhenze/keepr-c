@@ -86,13 +86,9 @@ namespace keepr.Controllers
         {
             var user = HttpContext.User;
             byte[] byteId;
-            if (HttpContext.Session != null)
-            {
-                HttpContext.Session.TryGetValue("uid", out byteId);
-                var id = System.Text.Encoding.UTF8.GetString(byteId);
-                return await _userManager.FindByIdAsync(id);
-            }
-            return null;
+            HttpContext.Session.TryGetValue("uid", out byteId);
+            var id = System.Text.Encoding.UTF8.GetString(byteId);
+            return await _userManager.FindByIdAsync(id);
         }
 
         private JsonResult Errors(IdentityResult result)
